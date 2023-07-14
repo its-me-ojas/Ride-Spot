@@ -11,14 +11,14 @@ app.use(express.static("public"));
 
 
 app.get("/", function(req, res) {
-  res.send("Hello");
-
+  res.render("intro");
 })
-
+app.post("/", function(req, res) {
+  res.redirect("/home");
+})
 app.get("/signup", function(req, res) {
   res.render("signup");
 })
-
 app.post("/signup", function(req, res) {
   const firstName = req.body.fName;
   const lastName = req.body.lName
@@ -67,7 +67,16 @@ app.post("/signup", function(req, res) {
 app.get("/home", function(req, res) {
   res.render("home");
 })
-
+app.post("/home", function(req, res) {
+  const buttonValue = req.body.button;
+  console.log(buttonValue);
+  if (buttonValue === "signup") {
+    res.redirect("/signup");
+  }
+  else if (buttonValue === "login") {
+    res.redirect("/login");
+  }
+})
 app.get("/success", function(req, res) {
   res.render("success");
 })
@@ -83,7 +92,9 @@ app.get("/failure", function(req, res) {
 app.post("/failure", function(req, res) {
   res.redirect("/signup");
 })
-
+app.get("/pricing", function(req,res) {
+  res.render("pricing");
+})
 
 app.listen(3000, function(req, res) {
   console.log("server is running");
