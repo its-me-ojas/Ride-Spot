@@ -92,7 +92,12 @@ app.get("/failure", function(req, res) {
 app.post("/failure", function(req, res) {
   res.redirect("/signup");
 })
-app.get("/pricing", function(req,res) {
+
+app.get("/features", function(req, res) {
+  res.render("features");
+})
+
+app.get("/pricing", function(req, res) {
   res.render("pricing");
 })
 
