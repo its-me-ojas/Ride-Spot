@@ -11,6 +11,7 @@ app.use(express.static("public"));
 
 const welcome = ["Welcome to RideSpot!", "Thank you for signing up! Get ready for an incredible ride-sharing experience with RideSpot. Stay tuned for exciting offers, exclusive deals, and the latest updates on our app's features. Buckle up and enjoy the journey!", "Get Started"];
 const emails = [];
+const messageSentToMe = [];
 
 app.get("/", function(req, res) {
   res.render("intro");
@@ -126,6 +127,30 @@ app.get("/features", function(req, res) {
 app.get("/pricing", function(req, res) {
   res.render("pricing");
 })
+
+app.get("/contact", function(req, res) {
+  res.render("contactMe");
+})
+
+app.post("/contact", function(req, res) {
+  const name = req.body.name;
+  const email = req.body.email;
+  const message = req.body.message;
+  const messageContact = {
+    name: name,
+    email: email,
+    message: message
+  }
+  messageSentToMe.push(messageContact);
+  console.log(messageSentToMe);
+})
+
+
+
+
+
+
+
 
 app.listen(3000, function(req, res) {
   console.log("server is running");
