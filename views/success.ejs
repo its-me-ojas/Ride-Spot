@@ -14,15 +14,19 @@
 <body class="vh-100">
   <div class="p-5 text-center bg-body-tertiary h-100 d-flex align-items-center justify-content-center">
     <div class="container py-5">
-      <h1 class="text-body-emphasis">Welcome to RideSpot!</h1>
+      <h1 class="text-body-emphasis">
+        <%= first %>
+      </h1>
       <p class="col-lg-8 mx-auto lead">
-        Thank you for signing up! Get ready for an incredible ride-sharing experience with RideSpot. Stay tuned for exciting offers, exclusive deals, and the latest updates on our app's features. Buckle up and enjoy the journey!
+        <%= second %>
       </p>
-       <form action="/success" method="post">
-      <button class="btn btn-lg btn-success" type="submit" name="button">Get Started</button>
-    </form>
+      <form action="/success" method="post">
+        <button class="btn btn-lg btn-success" type="submit" name="button">
+            <%= third %>
+        </button>
+      </form>
     </div>
-       
+
   </div>
 </body>
 

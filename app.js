@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.use(express.static("public"));
 
+const welcome = ["Welcome to RideSpot!", "Thank you for signing up! Get ready for an incredible ride-sharing experience with RideSpot. Stay tuned for exciting offers, exclusive deals, and the latest updates on our app's features. Buckle up and enjoy the journey!", "Get Started"];
+const emails = [];
 
 app.get("/", function(req, res) {
   res.render("intro");
@@ -54,7 +56,11 @@ app.post("/signup", function(req, res) {
   const request = https.request(url, options, function(response) {
     console.log(response.statusCode);
     if (response.statusCode === 200)
-      res.render("success");
+      res.render("success", {
+        first: welcome[0],
+        second: welcome[1],
+        third: welcome[2]
+      });
     else
       res.render("failure");
     response.on("data", function(data) {
@@ -67,7 +73,27 @@ app.post("/signup", function(req, res) {
 app.get("/home", function(req, res) {
   res.render("home");
 })
+
 app.post("/home", function(req, res) {
+  const email = req.body.email;
+
+  if (!emails.includes(email)) {
+    emails.push(email);
+    console.log(email);
+
+    res.render("success", {
+      first: "Thank You for Subscribing!",
+      second: "Welcome to our newsletter community. You will now receive the latest updates, news, and exclusive offers directly to your inbox.",
+      third: "Return to Home Page"
+    });
+  }
+  else {
+    res.render("success", {
+      first: "Thank you for your continued support! You are already subscribed to our newsletter.",
+      second: "Stay tuned for the latest updates, news, and exclusive offers directly in your inbox.",
+      third: "Return to Home Page"
+    });
+  }
   const buttonValue = req.body.button;
   console.log(buttonValue);
   if (buttonValue === "signup") {
@@ -104,3 +130,13 @@ app.get("/pricing", function(req, res) {
 app.listen(3000, function(req, res) {
   console.log("server is running");
 })
+
+
+
+
+
+
+
+
+
+
