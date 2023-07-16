@@ -13,16 +13,16 @@ const welcome = ["Welcome to RideSpot!", "Thank you for signing up! Get ready fo
 const emails = [];
 const messageSentToMe = [];
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.render("intro");
 })
-app.post("/", function(req, res) {
+app.post("/", function (req, res) {
   res.redirect("/home");
 })
-app.get("/signup", function(req, res) {
+app.get("/signup", function (req, res) {
   res.render("signup");
 })
-app.post("/signup", function(req, res) {
+app.post("/signup", function (req, res) {
   const firstName = req.body.fName;
   const lastName = req.body.lName
   const email = req.body.email;
@@ -54,7 +54,7 @@ app.post("/signup", function(req, res) {
     auth: "crest:cantposttheapikeyitgetsrevokedlol-us21"
   }
 
-  const request = https.request(url, options, function(response) {
+  const request = https.request(url, options, function (response) {
     console.log(response.statusCode);
     if (response.statusCode === 200)
       res.render("success", {
@@ -64,18 +64,18 @@ app.post("/signup", function(req, res) {
       });
     else
       res.render("failure");
-    response.on("data", function(data) {
+    response.on("data", function (data) {
       console.log(JSON.parse(data));
     })
   })
   request.write(jsonData);
   request.end();
 })
-app.get("/home", function(req, res) {
+app.get("/home", function (req, res) {
   res.render("home");
 })
 
-app.post("/home", function(req, res) {
+app.post("/home", function (req, res) {
   const email = req.body.email;
 
   if (!emails.includes(email)) {
@@ -104,35 +104,35 @@ app.post("/home", function(req, res) {
     res.redirect("/login");
   }
 })
-app.get("/success", function(req, res) {
+app.get("/success", function (req, res) {
   res.render("success");
 })
 
-app.post("/success", function(req, res) {
+app.post("/success", function (req, res) {
   res.redirect("/home");
 })
 
-app.get("/failure", function(req, res) {
+app.get("/failure", function (req, res) {
   res.render("failure");
 })
 
-app.post("/failure", function(req, res) {
+app.post("/failure", function (req, res) {
   res.redirect("/signup");
 })
 
-app.get("/features", function(req, res) {
+app.get("/features", function (req, res) {
   res.render("features");
 })
 
-app.get("/pricing", function(req, res) {
+app.get("/pricing", function (req, res) {
   res.render("pricing");
 })
 
-app.get("/contact", function(req, res) {
+app.get("/contact", function (req, res) {
   res.render("contactMe");
 })
 
-app.post("/contact", function(req, res) {
+app.post("/contact", function (req, res) {
   const name = req.body.name;
   const email = req.body.email;
   const message = req.body.message;
@@ -152,7 +152,7 @@ app.post("/contact", function(req, res) {
 
 
 
-app.listen(3000, function(req, res) {
+app.listen(3000, function (req, res) {
   console.log("server is running");
 })
 
